@@ -41,7 +41,7 @@ The language object should contain:
       patterns: {}
     }
 
-Language patterns can be found in the [patterns repository](https://github.com/bramstein/hyphenation-patterns).
+Language patterns can be found in the [patterns repository](https://github.com/mlengse/hyphenation-patterns).
 
 ## jQuery
 
