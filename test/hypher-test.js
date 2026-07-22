@@ -6,6 +6,7 @@ var Hypher = require('../lib/hypher'),
     language = data.language,
     german = require('./de.js'),
     finnish = require('./fi.js'),
+    indonesian = require('../lib/patterns/id.js'),
     dictionary = {};
 
 function assertHyphenation(hyphenation) {
@@ -210,5 +211,28 @@ vows.describe('Hypher').addBatch({
         'müsse': hyphenatesTextTo(['müs', 'se']),
         'sozioökonomisch': hyphenatesTextTo(['so', 'zio', 'öko', 'no', 'misch']),
         'kostenschätzungen': hyphenatesTextTo(['kos', 'ten', 'schät', 'zun', 'gen'])
+    },
+    'hyphenate Indonesian words': {
+        topic: function () {
+            return new Hypher(indonesian);
+        },
+        'bahasa': hyphenatesTo(['ba', 'ha', 'sa']),
+        'indonesia': hyphenatesTo(['in', 'do', 'ne', 'si', 'a']),
+        'komputer': hyphenatesTo(['kom', 'pu', 'ter']),
+        'hyphenation': hyphenatesTo(['hyp', 'he', 'na', 'ti', 'on'])
+    },
+    'hyphenate Indonesian with exceptions': {
+        topic: function () {
+            return new Hypher(indonesian);
+        },
+        'amerika': hyphenatesTo(['a', 'me', 'ri', 'ka']),
+        'angola': hyphenatesTo(['a', 'ngo', 'la']),
+        'afganistan': hyphenatesTo(['af', 'ga', 'nis', 'tan'])
+    },
+    'hyphenate Indonesian text': {
+        topic: function () {
+            return new Hypher(indonesian);
+        },
+        'Bahasa Indonesia adalah bahasa nasional': hyphenatesTextTo(['Ba', 'ha', 'sa In', 'do', 'ne', 'si', 'a ada', 'lah ba', 'ha', 'sa na', 'si', 'o', 'nal'])
     }
 }).export(module);
