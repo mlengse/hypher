@@ -22,8 +22,15 @@
     "hypher",
     "hypher.js",
     "ender",
-    "jquery"
+    "jquery",
+    "indonesian",
+    "bahasa",
+    "bahasa-indonesia",
+    "kbbi"
   ],
+  "engines": {
+    "node": ">=4"
+  },
   "license": "BSD-3-Clause",
   "main": "./lib/hypher.js",
   "ender": "./lib/ender.js"

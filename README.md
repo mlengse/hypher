@@ -87,7 +87,7 @@ The `examples/ender/` directory contains an example project using Ender and Hyph
 Hypher is licensed under the three clause BSD license (see BSD.txt.)
 
 ## See also
-* [Hyphenation patterns for use with Hypher](https://github.com/bramstein/hyphenation-patterns)
+* [Hyphenation patterns for use with Hypher](https://github.com/mlengse/hyphenation-patterns)
 * [Hyphenator.js](http://code.google.com/p/hyphenator/)
 
 ## Contributors
