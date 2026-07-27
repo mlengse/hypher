@@ -4,14 +4,14 @@
   "description": "A fast and small hyphenation engine",
   "author": "mLengse (medotsys@gmail.com)",
   "devDependencies": {
-    "benchmark": "=0.1.347",
-    "vows": ">=0.5.6"
+    "benchmark": "^2.1.4",
+    "jest": "^29.7.0"
   },
   "directories": {
     "lib": "./lib"
   },
   "scripts": {
-    "test": "vows"
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
@@ -29,9 +29,16 @@
     "kbbi"
   ],
   "engines": {
-    "node": ">=4"
+    "node": ">=14"
   },
   "license": "BSD-3-Clause",
   "main": "./lib/hypher.js",
+  "exports": {
+    ".": {
+      "import": "./lib/hypher.mjs",
+      "require": "./lib/hypher.js",
+      "default": "./lib/hypher.js"
+    }
+  },
   "ender": "./lib/ender.js"
 }

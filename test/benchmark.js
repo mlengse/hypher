@@ -26,15 +26,12 @@ Hyphenator.config({
 Hyphenator.languages['en'] = language;
 
 function hypherDictionary() {
-    var word;
+    var h = new Hypher(language),
+        word;
     
     for (word in dictionary) {
         h.hyphenate(word);
     }
-}
-
-function hypherSetup() {
-    h = new Hypher(language);
 }
 
 function hyphenatorDictionary() {
@@ -45,23 +42,13 @@ function hyphenatorDictionary() {
     }
 }
 
-function hyphenatorSetup() {
-    // Hyphenator uses an lazy cache, so to make a fair comparison we run through
-    // the dictionary in the setup code. This should ensure the cache is warm.
-    hyphenatorDictionary();
-}
+suite.add('Hypher', hypherDictionary);
 
-suite.add('Hypher', hypherDictionary, {
-    setup: hypherSetup
-});
+suite.add('Hyphenator', hyphenatorDictionary);
 
-suite.add('Hyphenator', hyphenatorDictionary, {
-    setup: hyphenatorSetup
-});
-
-suite.on('cycle', function(bench) {
-    console.log(String(bench));
+suite.on('cycle', function(event) {
+    console.log(event.target.toString());
 }).on('complete', function() {
-    console.log('Fastest is ' + this.filter('fastest').pluck('name'));
+    console.log('Fastest is ' + this.filter('fastest').map('name').join(', '));
 }).run(true);
 

@@ -1,6 +1,6 @@
 ## Hypher
 
-A small and fast JavaScript hyphenation engine. Can be used in Node.js and as a jQuery plugin.
+A small and fast JavaScript hyphenation engine. Can be used in Node.js (CommonJS and ESM) and as a jQuery plugin.
 
 ## Node.js
 Hypher can be installed from NPM:
@@ -9,9 +9,21 @@ Hypher can be installed from NPM:
 
 You can then use it in your program by creating an instance of `Hypher` and giving it a language object:
 
+### CommonJS
+
     var Hypher = require('hypher'),
         english = require('hyphenation.en-us'),
         h = new Hypher(english);
+
+    // returns ['hy', 'phen', 'ation']
+    h.hyphenate('hyphenation');
+
+### ES Modules
+
+    import Hypher from 'hypher';
+    import english from 'hyphenation.en-us';
+
+    const h = new Hypher(english);
 
     // returns ['hy', 'phen', 'ation']
     h.hyphenate('hyphenation');
@@ -26,10 +38,10 @@ The `hyphenateText` method takes an optional second parameter `minLength` which 
 The language object should contain:
 
     {
-      // The minimum number of unhyphenated characters at the left of each word. (required)
+      // The minimum number of unhyphenated characters at the left of each word. (default: 0)
       leftmin: <number>, 
 
-      // The minimum number of unhyphenated characters at the right of each word. (required)
+      // The minimum number of unhyphenated characters at the right of each word. (default: 0)
       rightmin: <number>,
 
       // A comma separated list of hyphenation exceptions. Custom hyphenations
