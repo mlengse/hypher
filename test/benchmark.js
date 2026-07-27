@@ -12,7 +12,7 @@ var result = {};
 
 // Create the dictionary of words we're using to test
 words.forEach(function (word) {
-    var w = word.split('=');
+    var w = word.split('-');
     dictionary[w.join('')] = w;
 });
 
