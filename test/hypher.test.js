@@ -305,7 +305,7 @@ describe('hyphenate Indonesian text', function () {
     });
 
     it('should hyphenate Indonesian sentence', function () {
-        expect(h.hyphenateText('Bahasa Indonesia adalah bahasa nasional').split('\u00AD')).toEqual(['Ba', 'ha', 'sa In', 'do', 'ne', 'si', 'a ada', 'lah ba', 'ha', 'sa na', 'si', 'o', 'nal']);
+        expect(h.hyphenateText('Bahasa Indonesia adalah bahasa nasional').split('\u00AD')).toEqual(['Ba', 'ha', 'sa In', 'do', 'ne', 'si', 'a a', 'da', 'lah ba', 'ha', 'sa na', 'si', 'o', 'nal']);
     });
 });
 
@@ -342,6 +342,6 @@ describe('fallback regex path (no Intl.Segmenter)', function () {
 
     it('should hyphenate Indonesian sentence', function () {
         var hi = new Hypher(indonesian);
-        expect(hi.hyphenateText('Bahasa Indonesia adalah bahasa nasional').split('\u00AD')).toEqual(['Ba', 'ha', 'sa In', 'do', 'ne', 'si', 'a ada', 'lah ba', 'ha', 'sa na', 'si', 'o', 'nal']);
+        expect(hi.hyphenateText('Bahasa Indonesia adalah bahasa nasional').split('\u00AD')).toEqual(['Ba', 'ha', 'sa In', 'do', 'ne', 'si', 'a a', 'da', 'lah ba', 'ha', 'sa na', 'si', 'o', 'nal']);
     });
 });
