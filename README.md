@@ -55,12 +55,42 @@ The language object should contain:
 
 Language patterns can be found in the [patterns repository](https://github.com/mlengse/hyphenation-patterns).
 
+## Bahasa Indonesia
+
+Hypher ships with Indonesian (Bahasa Indonesia) patterns derived from KBBI 2025 data, including a built-in exception list. They are available at the `hypher/lib/patterns/id` subpath:
+
+### CommonJS
+
+    var Hypher = require('hypher'),
+        indonesian = require('hypher/lib/patterns/id'),
+        h = new Hypher(indonesian);
+
+    // returns ['ba', 'ha', 'sa']
+    h.hyphenate('bahasa');
+
+    // returns 'Ba|ha|sa In|do|ne|si|a ada|lah ba|ha|sa na|si|o|nal.' where `|` is a soft hyphen
+    h.hyphenateText('Bahasa Indonesia adalah bahasa nasional.');
+
+### ES Modules
+
+    import Hypher from 'hypher';
+    import indonesian from 'hypher/lib/patterns/id';
+
+    const h = new Hypher(indonesian);
+
 ## jQuery
 
 To use the jQuery plugin include `dist/jquery.hypher.js` in your HTML document together with any number of language pattern files from the `dist/browser` directory in the [patterns repository](https://github.com/mlengse/hyphenation-patterns). It is important that you include `jquery.hypher.js` before any language pattern files.
 
     <script src="jquery.hypher.js"></script>
     <script src="en-us.js"></script>
+
+For Bahasa Indonesia, load `lib/patterns/id.js` (from the npm package) instead of an external pattern file:
+
+    <script src="dist/jquery.hypher.js"></script>
+    <script src="lib/patterns/id.js"></script>
+    ...
+    $('p').hyphenate('id');
 
 This will extend jQuery with a `hyphenate` method. Given the following HTML:
 

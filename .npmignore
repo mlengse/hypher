@@ -1,9 +1,8 @@
 test/
 examples/
-dist/
 Makefile
-BSD.txt
-README.md
+.idea/
+rollup.config.mjs
 lib/jquery.hypher.js
 lib/hypher.browser.pre.js
 lib/hypher.browser.post.js

@@ -308,3 +308,40 @@ describe('hyphenate Indonesian text', function () {
         expect(h.hyphenateText('Bahasa Indonesia adalah bahasa nasional').split('\u00AD')).toEqual(['Ba', 'ha', 'sa In', 'do', 'ne', 'si', 'a ada', 'lah ba', 'ha', 'sa na', 'si', 'o', 'nal']);
     });
 });
+
+describe('fallback regex path (no Intl.Segmenter)', function () {
+    var h, originalSegmenter;
+    beforeAll(function () {
+        originalSegmenter = Intl.Segmenter;
+        Intl.Segmenter = undefined;
+        h = new Hypher(language);
+    });
+    afterAll(function () {
+        Intl.Segmenter = originalSegmenter;
+    });
+
+    it('should handle URL', function () {
+        expect(h.hyphenateText('http://www.ex.com/').split('\u00AD')).toEqual(['http://\u200Bwww.ex.com/']);
+    });
+
+    it('should handle file path', function () {
+        expect(h.hyphenateText('some/path/to/some/where').split('\u00AD')).toEqual(['some/\u200Bpath/\u200Bto/\u200Bsome/\u200Bwhere']);
+    });
+
+    it('should handle text with embedded path and more text', function () {
+        expect(h.hyphenateText('a text with a /path/in/it/ and more text').split('\u00AD')).toEqual(['a text with a /path/\u200Bin/\u200Bit/ and more text']);
+    });
+
+    it('should handle plain hyphen', function () {
+        expect(h.hyphenateText('bootstrapping-brainstorm-victories').split('\u00AD')).toEqual(['boot', 'strap', 'ping-brain', 'storm-vic', 'to', 'ries']);
+    });
+
+    it('should split text with soft hyphens correctly', function () {
+        expect(h.hyphenateText('hyph\u00ADen charact\u00ADer').split('\u00AD')).toEqual(['hyph', 'en charact', 'er']);
+    });
+
+    it('should hyphenate Indonesian sentence', function () {
+        var hi = new Hypher(indonesian);
+        expect(hi.hyphenateText('Bahasa Indonesia adalah bahasa nasional').split('\u00AD')).toEqual(['Ba', 'ha', 'sa In', 'do', 'ne', 'si', 'a ada', 'lah ba', 'ha', 'sa na', 'si', 'o', 'nal']);
+    });
+});

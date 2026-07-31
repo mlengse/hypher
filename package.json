@@ -15,7 +15,8 @@
   },
   "scripts": {
     "test": "jest --verbose",
-    "build": "rollup -c rollup.config.mjs && node -e \"var fs=require('fs');var pre=fs.readFileSync('lib/hypher.browser.pre.js','utf8');var core=fs.readFileSync('lib/hypher.js','utf8');var post=fs.readFileSync('lib/hypher.browser.post.js','utf8');var jq=fs.readFileSync('lib/jquery.hypher.js','utf8');fs.writeFileSync('dist/jquery.hypher.js',pre+core+post+jq);\""
+    "build": "rollup -c rollup.config.mjs && node -e \"var fs=require('fs');var pre=fs.readFileSync('lib/hypher.browser.pre.js','utf8');var core=fs.readFileSync('lib/hypher.js','utf8');var post=fs.readFileSync('lib/hypher.browser.post.js','utf8');var jq=fs.readFileSync('lib/jquery.hypher.js','utf8');fs.writeFileSync('dist/jquery.hypher.js',pre+core+post+jq);\"",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -42,7 +43,9 @@
       "import": "./lib/hypher.mjs",
       "require": "./lib/hypher.js",
       "default": "./lib/hypher.js"
-    }
+    },
+    "./lib/patterns/*.js": "./lib/patterns/*.js",
+    "./package.json": "./package.json"
   },
   "ender": "./lib/ender.js"
 }
