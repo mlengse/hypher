@@ -3,8 +3,7 @@ var Hypher = require('../lib/hypher'),
     words = data.words,
     language = data.language,
     german = require('./de.js'),
-    finnish = require('./fi.js'),
-    indonesian = require('../lib/patterns/id.js');
+    finnish = require('./fi.js');
 
 var dictionary = {};
 
@@ -256,59 +255,6 @@ describe('hyphenate text with special characters', function () {
     });
 });
 
-describe('hyphenate Indonesian words', function () {
-    var h;
-    beforeAll(function () {
-        h = new Hypher(indonesian);
-    });
-
-    it('should hyphenate "bahasa"', function () {
-        expect(h.hyphenate('bahasa')).toEqual(['ba', 'ha', 'sa']);
-    });
-
-    it('should hyphenate "indonesia"', function () {
-        expect(h.hyphenate('indonesia')).toEqual(['in', 'do', 'ne', 'si', 'a']);
-    });
-
-    it('should hyphenate "komputer"', function () {
-        expect(h.hyphenate('komputer')).toEqual(['kom', 'pu', 'ter']);
-    });
-
-    it('should hyphenate "hyphenation"', function () {
-        expect(h.hyphenate('hyphenation')).toEqual(['hyp', 'he', 'na', 'ti', 'on']);
-    });
-});
-
-describe('hyphenate Indonesian with exceptions', function () {
-    var h;
-    beforeAll(function () {
-        h = new Hypher(indonesian);
-    });
-
-    it('should use exceptions for "amerika"', function () {
-        expect(h.hyphenate('amerika')).toEqual(['a', 'me', 'ri', 'ka']);
-    });
-
-    it('should use exceptions for "angola"', function () {
-        expect(h.hyphenate('angola')).toEqual(['a', 'ngo', 'la']);
-    });
-
-    it('should use exceptions for "afganistan"', function () {
-        expect(h.hyphenate('afganistan')).toEqual(['af', 'ga', 'nis', 'tan']);
-    });
-});
-
-describe('hyphenate Indonesian text', function () {
-    var h;
-    beforeAll(function () {
-        h = new Hypher(indonesian);
-    });
-
-    it('should hyphenate Indonesian sentence', function () {
-        expect(h.hyphenateText('Bahasa Indonesia adalah bahasa nasional').split('\u00AD')).toEqual(['Ba', 'ha', 'sa In', 'do', 'ne', 'si', 'a a', 'da', 'lah ba', 'ha', 'sa na', 'si', 'o', 'nal']);
-    });
-});
-
 describe('fallback regex path (no Intl.Segmenter)', function () {
     var h, originalSegmenter;
     beforeAll(function () {
@@ -338,10 +284,5 @@ describe('fallback regex path (no Intl.Segmenter)', function () {
 
     it('should split text with soft hyphens correctly', function () {
         expect(h.hyphenateText('hyph\u00ADen charact\u00ADer').split('\u00AD')).toEqual(['hyph', 'en charact', 'er']);
-    });
-
-    it('should hyphenate Indonesian sentence', function () {
-        var hi = new Hypher(indonesian);
-        expect(hi.hyphenateText('Bahasa Indonesia adalah bahasa nasional').split('\u00AD')).toEqual(['Ba', 'ha', 'sa In', 'do', 'ne', 'si', 'a a', 'da', 'lah ba', 'ha', 'sa na', 'si', 'o', 'nal']);
     });
 });

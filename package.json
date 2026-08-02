@@ -27,11 +27,7 @@
     "hypher",
     "hypher.js",
     "ender",
-    "jquery",
-    "indonesian",
-    "bahasa",
-    "bahasa-indonesia",
-    "kbbi"
+    "jquery"
   ],
   "engines": {
     "node": ">=14"
@@ -44,7 +40,6 @@
       "require": "./lib/hypher.js",
       "default": "./lib/hypher.js"
     },
-    "./lib/patterns/*.js": "./lib/patterns/*.js",
     "./package.json": "./package.json"
   },
   "ender": "./lib/ender.js"
