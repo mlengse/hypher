@@ -173,6 +173,15 @@ describe('hyphenate with exceptions', function () {
         expect(h.hyphenate('bootstrapping')).toEqual(['bootstrapping']);
         expect(h.hyphenate('brainstorm')).toEqual(['brainstorm']);
     });
+
+    it('should safely check exceptions without trigger prototype pollution or shadowed hasOwnProperty', function () {
+        var l = Object.create(language);
+        l.exceptions = 'bootstrapping';
+        var h = new Hypher(l);
+        h.exceptions.hasOwnProperty = null;
+        expect(h.hyphenate('toString')).not.toEqual([]);
+        expect(h.hyphenate('bootstrapping')).toEqual(['bootstrapping']);
+    });
 });
 
 describe('hyphenate with custom points', function () {
