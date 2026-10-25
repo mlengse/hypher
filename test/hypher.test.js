@@ -255,6 +255,19 @@ describe('hyphenate text with special characters', function () {
     });
 });
 
+describe('hyphenateText with custom minLength', function () {
+    var h;
+    beforeAll(function () {
+        h = new Hypher(language);
+    });
+
+    it('should respect custom minLength in hyphenateText', function () {
+        expect(h.hyphenateText('something', 4)).toEqual('some\u00ADthing');
+        expect(h.hyphenateText('something', 10)).toEqual('something');
+        expect(h.hyphenateText('something', 8)).toEqual('some\u00ADthing');
+    });
+});
+
 describe('fallback regex path (no Intl.Segmenter)', function () {
     var h, originalSegmenter;
     beforeAll(function () {
@@ -284,5 +297,11 @@ describe('fallback regex path (no Intl.Segmenter)', function () {
 
     it('should split text with soft hyphens correctly', function () {
         expect(h.hyphenateText('hyph\u00ADen charact\u00ADer').split('\u00AD')).toEqual(['hyph', 'en charact', 'er']);
+    });
+
+    it('should respect custom minLength in hyphenateText in fallback mode', function () {
+        expect(h.hyphenateText('something', 4)).toEqual('some\u00ADthing');
+        expect(h.hyphenateText('something', 10)).toEqual('something');
+        expect(h.hyphenateText('something', 8)).toEqual('some\u00ADthing');
     });
 });
