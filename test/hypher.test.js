@@ -79,6 +79,18 @@ describe('trie', function () {
             _points: []
         });
     });
+
+    it('creates trie safely when patternObject has shadowed hasOwnProperty', function () {
+        var patternObj = {
+            "2": "a1b2"
+        };
+        Object.defineProperty(patternObj, 'hasOwnProperty', {
+            value: null,
+            enumerable: false
+        });
+        var instance = new Hypher({ patterns: patternObj });
+        expect(instance.trie[97]).toBeDefined();
+    });
 });
 
 describe('hyphenate with soft hyphens', function () {
