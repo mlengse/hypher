@@ -12,6 +12,32 @@ words.forEach(function (word) {
     dictionary[w.join('')] = w;
 });
 
+describe('constructor validation', function () {
+    it('should throw an error when language object is missing or not an object', function () {
+        expect(function () {
+            new Hypher();
+        }).toThrow('Hypher: language object is required');
+
+        expect(function () {
+            new Hypher(null);
+        }).toThrow('Hypher: language object is required');
+
+        expect(function () {
+            new Hypher('not-an-object');
+        }).toThrow('Hypher: language object is required');
+    });
+
+    it('should throw an error when language patterns are missing', function () {
+        expect(function () {
+            new Hypher({});
+        }).toThrow('Hypher: language patterns are required');
+
+        expect(function () {
+            new Hypher({ patterns: null });
+        }).toThrow('Hypher: language patterns are required');
+    });
+});
+
 describe('hyphenate', function () {
     var h;
     beforeAll(function () {
