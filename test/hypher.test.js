@@ -312,6 +312,7 @@ describe('hyphenateText with custom minLength', function () {
         expect(h.hyphenateText('something', 4)).toEqual('some\u00ADthing');
         expect(h.hyphenateText('something', 10)).toEqual('something');
         expect(h.hyphenateText('something', 8)).toEqual('some\u00ADthing');
+        expect(h.hyphenateText('something short', 6)).toEqual('some\u00ADthing short');
     });
 });
 
@@ -350,5 +351,6 @@ describe('fallback regex path (no Intl.Segmenter)', function () {
         expect(h.hyphenateText('something', 4)).toEqual('some\u00ADthing');
         expect(h.hyphenateText('something', 10)).toEqual('something');
         expect(h.hyphenateText('something', 8)).toEqual('some\u00ADthing');
+        expect(h.hyphenateText('something short', 6)).toEqual('some\u00ADthing short');
     });
 });
