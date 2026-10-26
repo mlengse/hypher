@@ -35,6 +35,10 @@ describe('constructor validation', function () {
         expect(function () {
             new Hypher({ patterns: null });
         }).toThrow('Hypher: language patterns are required');
+
+        expect(function () {
+            new Hypher({ patterns: undefined });
+        }).toThrow('Hypher: language patterns are required');
     });
 });
 
