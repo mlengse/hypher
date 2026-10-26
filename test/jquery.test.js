@@ -78,4 +78,24 @@ describe('jQuery plugin', function () {
         expect(context.each).not.toHaveBeenCalled();
         expect(node.childNodes[0].nodeValue).toBe('something');
     });
+
+    it('should do nothing if prototype property name is passed as language', function () {
+        var node = {
+            childNodes: [
+                {
+                    nodeType: 3,
+                    nodeValue: 'something'
+                }
+            ]
+        };
+
+        var context = [node];
+        context.each = jest.fn();
+
+        var result = mockJQuery.fn.hyphenate.call(context, 'toString');
+
+        expect(result).toBeUndefined();
+        expect(context.each).not.toHaveBeenCalled();
+        expect(node.childNodes[0].nodeValue).toBe('something');
+    });
 });
