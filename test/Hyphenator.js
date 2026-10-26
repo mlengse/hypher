@@ -1237,21 +1237,17 @@ var Hyphenator = (function (window) {
 	 * @private
 	 */		
 	toggleBox = function () {
-		var myBox, bdy, myIdAttribute, myTextNode, myClassAttribute,
+		var myBox, bdy, myTextNode,
 		text = (Hyphenator.doHyphenation ? 'Hy-phen-a-tion' : 'Hyphenation');
 		if (!!(myBox = contextWindow.document.getElementById('HyphenatorToggleBox'))) {
 			myBox.firstChild.data = text;
 		} else {
 			bdy = contextWindow.document.getElementsByTagName('body')[0];
 			myBox = createElem('div', contextWindow);
-			myIdAttribute = contextWindow.document.createAttribute('id');
-			myIdAttribute.nodeValue = 'HyphenatorToggleBox';
-			myClassAttribute = contextWindow.document.createAttribute('class');
-			myClassAttribute.nodeValue = dontHyphenateClass;
+			myBox.id = 'HyphenatorToggleBox';
+			myBox.className = dontHyphenateClass;
 			myTextNode = contextWindow.document.createTextNode(text);
 			myBox.appendChild(myTextNode);
-			myBox.setAttributeNode(myIdAttribute);
-			myBox.setAttributeNode(myClassAttribute);
 			myBox.onclick =  Hyphenator.toggleHyphenation;
 			myBox.style.position = 'absolute';
 			myBox.style.top = '0px';
