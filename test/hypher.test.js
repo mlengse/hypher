@@ -69,15 +69,15 @@ describe('trie', function () {
     it('trie is correctly generated', function () {
         expect(h.trie).toEqual({
             97: {
-                _points: [0, "1"],
+                _points: [0, 1],
                 98: {
-                    _points: [0, "2", 0]
+                    _points: [0, 2, 0]
                 }
             },
             98: {
-                _points: [0, "2"],
+                _points: [0, 2],
                 99: {
-                    _points: [0, "3", 0]
+                    _points: [0, 3, 0]
                 }
             },
             _points: []
