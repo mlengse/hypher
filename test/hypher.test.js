@@ -214,6 +214,22 @@ describe('hyphenate with exceptions', function () {
         expect(h.hyphenate('toString')).not.toEqual([]);
         expect(h.hyphenate('bootstrapping')).toEqual(['bootstrapping']);
     });
+
+    it('should escape special regex characters in exceptions without crashing', function () {
+        var l = Object.create(language);
+        l.exceptions = 'c*a‧t, w?o‧rd, b[a]‧r, (f)o‧o, a+b‧c, x$y‧z, {a}‧b, u|v‧w, p^q‧r, k\l‧m';
+        var h = new Hypher(l);
+        expect(h.hyphenate('c*at')).toEqual(['c*a', 't']);
+        expect(h.hyphenate('w?ord')).toEqual(['w?o', 'rd']);
+        expect(h.hyphenate('b[a]r')).toEqual(['b[a]', 'r']);
+        expect(h.hyphenate('(f)oo')).toEqual(['(f)o', 'o']);
+        expect(h.hyphenate('a+bc')).toEqual(['a+b', 'c']);
+        expect(h.hyphenate('x$yz')).toEqual(['x$y', 'z']);
+        expect(h.hyphenate('{a}b')).toEqual(['{a}', 'b']);
+        expect(h.hyphenate('u|vw')).toEqual(['u|v', 'w']);
+        expect(h.hyphenate('p^qr')).toEqual(['p^q', 'r']);
+        expect(h.hyphenate('k\lm')).toEqual(['k\l', 'm']);
+    });
 });
 
 describe('hyphenate with custom points', function () {
