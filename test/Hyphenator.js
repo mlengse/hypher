@@ -829,11 +829,7 @@ var Hyphenator = (function (window) {
 		if (!!el.getAttribute('lang')) {
 			return el.getAttribute('lang').toLowerCase();
 		}
-		// The following doesn't work in IE due to a bug when getAttribute('xml:lang') in a table
-		/*if (!!el.getAttribute('xml:lang')) {
-			return el.getAttribute('xml:lang').substring(0, 2);
-		}*/
-		//instead, we have to do this (thanks to borgzor):
+		// A try/catch block is required here due to a bug in IE when calling getAttribute('xml:lang') on table elements (thanks to borgzor):
 		try {
 			if (!!el.getAttribute('xml:lang')) {
 				return el.getAttribute('xml:lang').toLowerCase();
