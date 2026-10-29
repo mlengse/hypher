@@ -97,6 +97,22 @@ describe('trie', function () {
     });
 });
 
+
+describe('empty string handling', function () {
+    var h;
+    beforeAll(function () {
+        h = new Hypher(language);
+    });
+
+    it('should return empty string when hyphenating empty text', function () {
+        expect(h.hyphenateText('')).toEqual('');
+    });
+
+    it('should return array with empty string when hyphenating empty word', function () {
+        expect(h.hyphenate('')).toEqual(['']);
+    });
+});
+
 describe('hyphenate with soft hyphens', function () {
     var h;
     beforeAll(function () {
@@ -372,6 +388,11 @@ describe('fallback regex path (no Intl.Segmenter)', function () {
 
     it('should split text with soft hyphens correctly', function () {
         expect(h.hyphenateText('hyph\u00ADen charact\u00ADer').split('\u00AD')).toEqual(['hyph', 'en charact', 'er']);
+    });
+
+    it('should handle empty string in fallback mode', function () {
+        expect(h.hyphenateText('')).toEqual('');
+        expect(h.hyphenate('')).toEqual(['']);
     });
 
     it('should respect custom minLength in hyphenateText in fallback mode', function () {
