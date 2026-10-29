@@ -268,6 +268,29 @@ describe('hyphenate path like strings', function () {
     });
 });
 
+describe('hyphenate domain names and file extensions', function () {
+    var h;
+    beforeAll(function () {
+        h = new Hypher(language);
+    });
+
+    it('should not hyphenate domain names', function () {
+        expect(h.hyphenateText('www.example.com')).toBe('www.example.com');
+        expect(h.hyphenateText('example.org')).toBe('example.org');
+        expect(h.hyphenateText('sub.domain.co.uk')).toBe('sub.domain.co.uk');
+    });
+
+    it('should not hyphenate file names with extensions', function () {
+        expect(h.hyphenateText('document.pdf')).toBe('document.pdf');
+        expect(h.hyphenateText('image.png')).toBe('image.png');
+        expect(h.hyphenateText('archive.tar.gz')).toBe('archive.tar.gz');
+    });
+
+    it('should not hyphenate domain names or file extensions in full text while hyphenating regular words', function () {
+        expect(h.hyphenateText('Please visit www.example.com or download document.pdf for information.')).toBe('Please visit www.example.com or down\u00ADload document.pdf for in\u00ADfor\u00ADma\u00ADtion.');
+    });
+});
+
 describe('hyphenate with special characters', function () {
     var h;
     beforeAll(function () {
