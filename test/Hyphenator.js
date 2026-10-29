@@ -1398,7 +1398,7 @@ var Hyphenator = (function (window) {
 	 * @description
 	 * Removes all hyphens from the element. If there are other elements, the function is
 	 * called recursively.
-	 * Removing hyphens is usefull if you like to copy text. Some browsers are buggy when the copy hyphenated texts.
+	 * Removing hyphens is useful if you like to copy text. Some browsers are buggy when they copy hyphenated texts.
 	 * @param {Object} el The element where to remove hyphenation.
 	 * @public
 	 */
