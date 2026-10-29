@@ -95,6 +95,28 @@ describe('trie', function () {
         var instance = new Hypher({ patterns: patternObj });
         expect(instance.trie[97]).toBeDefined();
     });
+
+    it('handles invalid or malicious size keys in patternObject safely', function () {
+        var patternObj = {
+            'invalid': 'a1b',
+            '-5': 'a1b',
+            '0': 'a1b',
+            '1000': 'a1b',
+            '2': 'a1b2'
+        };
+        var instance = new Hypher({ patterns: patternObj });
+        expect(instance.trie[97]).toBeDefined();
+    });
+
+    it('handles non-string or empty pattern values safely', function () {
+        var patternObj = {
+            '3': null,
+            '4': '',
+            '5': 12345
+        };
+        var instance = new Hypher({ patterns: patternObj });
+        expect(instance.trie).toEqual({ _points: [] });
+    });
 });
 
 
